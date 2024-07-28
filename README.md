@@ -1,3 +1,7 @@
+## Readme
+you know that this repo forked from nasa-jpl/embedded-gcov, but the upstream branch has been lacking in maintenance, and encountered several bugs in its use. so collected patch and update it.
+
+## Usage
 GCC/gcov code coverage data extraction from the actual embedded system, without requiring a file system, or an operating system, or standard C libraries.
 
 See the PDF slide file in the repo for an overview, and see the github wiki for more information about customization options for your embedded system. Also see the simple Linux-compilable example in the repo.
