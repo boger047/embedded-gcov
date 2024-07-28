@@ -29,7 +29,7 @@
  * if something goes wrong.
  *
  * Thanassis Tsiodras
- * Real-time Embedded Software Engineer 
+ * Real-time Embedded Software Engineer
  * System, Software and Technology Department
  * European Space Agency
  *
@@ -79,11 +79,17 @@
  * (gcc 11.1.0 (but not 11.2.0) multiplied counter length by 2*4,
  * but we do not need to duplicate that glitch(?))
  */
+#if (__GNUC__ >= 12)
+#define GCOV_WORD_SIZE		4
+#else
+#define GCOV_WORD_SIZE		1
+#endif
+
 #define GCOV_DATA_MAGIC		((gcov_unsigned_t) 0x67636461)
 #define GCOV_TAG_FUNCTION	((gcov_unsigned_t) 0x01000000)
-#define GCOV_TAG_FUNCTION_LENGTH	(3)
+#define GCOV_TAG_FUNCTION_LENGTH	(3 * GCOV_WORD_SIZE)
 #define GCOV_TAG_COUNTER_BASE	((gcov_unsigned_t) 0x01a10000)
-#define GCOV_TAG_COUNTER_LENGTH(NUM) ((NUM) * 2)
+#define GCOV_TAG_COUNTER_LENGTH(NUM) ((NUM) * 2 * GCOV_WORD_SIZE)
 #define GCOV_TAG_FOR_COUNTER(count) (GCOV_TAG_COUNTER_BASE + ((gcov_unsigned_t) (count) << 17))
 
 /* Interface to access gcov_info data  */
